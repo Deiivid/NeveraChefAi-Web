@@ -1,20 +1,30 @@
-name: Deploy Web to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - master
       - main
+      - master
+    paths:
+      - ".github/workflows/deploy-pages.yml"
+      - "shared/**"
+      - "webApp/**"
+      - "settings.gradle.kts"
+      - "build.gradle.kts"
+      - "gradle.properties"
+      - "gradle/**"
+      - "gradlew"
+      - "gradlew.bat"
   workflow_dispatch:
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
   pages: write
   id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
 
 jobs:
   build:
@@ -33,19 +43,14 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
-      - name: Build web distribution
-        run: ./gradlew :webApp:wasmJsBrowserDistribution
+      - name: Build WASM
+        run: ./gradlew :webApp:wasmJsBrowserDistribution --no-daemon
 
       - name: Prepare Pages artifact
         run: touch webApp/build/dist/wasmJs/productionExecutable/.nojekyll
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           path: webApp/build/dist/wasmJs/productionExecutable
 
