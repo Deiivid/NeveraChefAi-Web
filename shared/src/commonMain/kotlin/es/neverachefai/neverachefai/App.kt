@@ -80,6 +80,7 @@ private val WarmSurface = Color(0xFFFFFCF7)
 private val SoftGreen = Color(0xFFEAF6ED)
 private val PrivacyPanel = Color(0xFF18221D)
 private val BorderColor = Color(0x1A12201B)
+private val HeroInk = Color(0xFF051B14)
 
 private data class PrivacyEntry(
     val title: String,
@@ -138,7 +139,8 @@ private fun Header(
     BoxWithConstraints(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.White.copy(alpha = 0.96f)),
+            .shadow(8.dp, ambientColor = Color.Black.copy(alpha = 0.08f), spotColor = Color.Black.copy(alpha = 0.05f))
+            .background(Color.White.copy(alpha = 0.98f)),
     ) {
         val compact = maxWidth < 760.dp
         if (compact) {
@@ -158,7 +160,7 @@ private fun Header(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 48.dp, vertical = 14.dp),
+                    .padding(horizontal = 58.dp, vertical = 16.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
@@ -226,7 +228,8 @@ private fun TopTab(
         modifier = Modifier
             .clip(RoundedCornerShape(4.dp))
             .clickable(onClick = onClick)
-            .padding(horizontal = 2.dp, vertical = 7.dp),
+            .background(if (selected) SoftGreen else Color.Transparent, RoundedCornerShape(12.dp))
+            .padding(horizontal = 12.dp, vertical = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
@@ -238,7 +241,7 @@ private fun TopTab(
         Spacer(Modifier.height(7.dp))
         Box(
             modifier = Modifier
-                .width(48.dp)
+                .width(42.dp)
                 .height(3.dp)
                 .background(if (selected) BrandGreen else Color.Transparent, RoundedCornerShape(8.dp)),
         )
@@ -250,7 +253,7 @@ private fun HomeScreen() {
     BoxWithConstraints(
         modifier = Modifier
             .fillMaxWidth()
-            .height(500.dp)
+            .height(540.dp)
             .background(
                 Brush.horizontalGradient(
                     listOf(Color.White, Color(0xFFF5F8F3), Color(0xFFEAF1EA)),
@@ -264,8 +267,8 @@ private fun HomeScreen() {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(if (narrow) 460.dp else 500.dp)
-                    .padding(horizontal = 28.dp, vertical = if (narrow) 42.dp else 36.dp),
+                    .height(if (narrow) 480.dp else 540.dp)
+                    .padding(horizontal = 28.dp, vertical = if (narrow) 44.dp else 40.dp),
                 verticalArrangement = Arrangement.spacedBy(18.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
@@ -278,8 +281,8 @@ private fun HomeScreen() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(500.dp)
-                    .padding(horizontal = 64.dp, vertical = 42.dp),
+                    .height(540.dp)
+                    .padding(horizontal = 72.dp, vertical = 46.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(56.dp),
             ) {
@@ -297,13 +300,25 @@ private fun HeroCopy(
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(if (compact) 16.dp else 20.dp),
+        verticalArrangement = Arrangement.spacedBy(if (compact) 16.dp else 22.dp),
     ) {
         Text(
+            text = "NeveraChefAI",
+            color = BrandGreen,
+            fontSize = 15.sp,
+            lineHeight = 18.sp,
+            fontWeight = FontWeight.Black,
+            modifier = Modifier
+                .clip(RoundedCornerShape(18.dp))
+                .background(Color.White.copy(alpha = 0.84f))
+                .border(1.dp, BrandGreen.copy(alpha = 0.18f), RoundedCornerShape(18.dp))
+                .padding(horizontal = 14.dp, vertical = 7.dp),
+        )
+        Text(
             text = "Cocina con lo\nque ya tienes",
-            color = Color(0xFF071813),
-            fontSize = if (compact) 46.sp else 58.sp,
-            lineHeight = if (compact) 52.sp else 64.sp,
+            color = HeroInk,
+            fontSize = if (compact) 48.sp else 64.sp,
+            lineHeight = if (compact) 54.sp else 70.sp,
             fontWeight = FontWeight.Black,
             letterSpacing = 0.sp,
         )
@@ -363,15 +378,15 @@ private fun KitchenBackdrop() {
         )
         Box(
             modifier = Modifier
-                .matchParentSize()
-                .background(
-                    Brush.horizontalGradient(
-                        0f to Color.White.copy(alpha = 0.9f),
-                        0.36f to Color.White.copy(alpha = 0.68f),
-                        0.7f to Color.White.copy(alpha = 0.08f),
+            .matchParentSize()
+            .background(
+                Brush.horizontalGradient(
+                        0f to Color.White.copy(alpha = 0.92f),
+                        0.33f to Color.White.copy(alpha = 0.72f),
+                        0.58f to Color.White.copy(alpha = 0.25f),
                         1f to Color.Transparent,
-                    ),
                 ),
+            ),
         )
     }
 }
@@ -551,7 +566,7 @@ private fun ValueStrip() {
         modifier = Modifier
             .fillMaxWidth()
             .background(Color(0xFFF8FBF8))
-            .padding(horizontal = 48.dp, vertical = 24.dp),
+            .padding(horizontal = 56.dp, vertical = 32.dp),
     ) {
         if (maxWidth < 980.dp) {
             FlowRow(
@@ -596,10 +611,11 @@ private fun ValueItem(
     Row(
         modifier = modifier
             .heightIn(min = 118.dp)
+            .shadow(8.dp, RoundedCornerShape(18.dp), ambientColor = Color.Black.copy(alpha = 0.04f))
             .clip(RoundedCornerShape(18.dp))
             .background(Color.White)
             .border(1.dp, BorderColor, RoundedCornerShape(18.dp))
-            .padding(16.dp),
+            .padding(18.dp),
         horizontalArrangement = Arrangement.spacedBy(14.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
