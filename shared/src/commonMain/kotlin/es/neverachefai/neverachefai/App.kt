@@ -303,18 +303,6 @@ private fun HeroCopy(
         verticalArrangement = Arrangement.spacedBy(if (compact) 16.dp else 22.dp),
     ) {
         Text(
-            text = "NeveraChefAI",
-            color = BrandGreen,
-            fontSize = 15.sp,
-            lineHeight = 18.sp,
-            fontWeight = FontWeight.Black,
-            modifier = Modifier
-                .clip(RoundedCornerShape(18.dp))
-                .background(Color.White.copy(alpha = 0.84f))
-                .border(1.dp, BrandGreen.copy(alpha = 0.18f), RoundedCornerShape(18.dp))
-                .padding(horizontal = 14.dp, vertical = 7.dp),
-        )
-        Text(
             text = "Cocina con lo\nque ya tienes",
             color = HeroInk,
             fontSize = if (compact) 48.sp else 64.sp,
