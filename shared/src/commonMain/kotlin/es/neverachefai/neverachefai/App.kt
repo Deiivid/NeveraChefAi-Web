@@ -204,9 +204,9 @@ private fun NavigationTabs(
     selectedPage: SitePage,
     onPageSelected: (SitePage) -> Unit,
 ) {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(24.dp),
-        verticalAlignment = Alignment.CenterVertically,
+    FlowRow(
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         SitePage.entries.forEach { page ->
             TopTab(
@@ -215,6 +215,11 @@ private fun NavigationTabs(
                 onClick = { onPageSelected(page) },
             )
         }
+        TopTab(
+            text = "Eliminar cuenta",
+            selected = false,
+            onClick = ::openAccountDeletionPage,
+        )
     }
 }
 
@@ -670,7 +675,7 @@ private fun PrivacyPanelCard(
             )
             PrivacyLanguagePanel(
                 title = if (isEnglish) "Privacy Policy" else "Política de Privacidad",
-                updated = if (isEnglish) "Last updated: June 26, 2026" else "Última actualización: 26 de junio de 2026",
+                updated = if (isEnglish) "Last updated: October 15, 2026" else "Última actualización: 15 de octubre de 2026",
                 entries = if (isEnglish) englishPrivacyEntries() else spanishPrivacyEntries(),
             )
         }
@@ -938,16 +943,16 @@ private fun englishPrivacyEntries() = listOf(
         ),
     ),
     PrivacyEntry(
-        title = "4. Data We Do Not Collect",
-        body = "NeveraChefAI does not create user accounts and does not send the app's main local content to its own servers. We do not ask users to provide:",
+        title = "4. Accounts and Personal Data",
+        body = "Creating an account is optional. When you sign in, Supabase processes your email address, authentication credentials, profile and household membership to provide account access and cloud synchronization. We do not require:",
         bullets = listOf(
-            "name, email address, location, contacts, photos, videos, personal files, financial data, or health data;",
+            "location, contacts, personal files, financial data, or health data;",
             "browsing history or usage data for creating user profiles.",
         ),
     ),
     PrivacyEntry(
         title = "5. Local Storage",
-        body = "Data entered by the user is stored locally on the device. NeveraChefAI does not automatically sync the inventory, shopping list, or recipes with external servers. Users can delete this data in the app when available, by clearing app data in the operating system settings, or by uninstalling the app.",
+        body = "Data is stored locally on the device. When you use an account, Supabase also stores your profile, recipe preferences and household inventory, shopping lists and purchase history for synchronization. Clearing app data or uninstalling removes local data; it does not delete your cloud account.",
     ),
     PrivacyEntry(
         title = "6. Microphone",
@@ -963,15 +968,15 @@ private fun englishPrivacyEntries() = listOf(
     ),
     PrivacyEntry(
         title = "9. Shopping List Sharing",
-        body = "NeveraChefAI may allow users to share shopping lists with other people through the standard sharing options of the operating system. This only happens when the user voluntarily decides to share a list. NeveraChefAI does not keep an external copy of the shared list and does not control how the selected sharing apps process it.",
+        body = "NeveraChefAI may allow users to share shopping lists with other people through the standard sharing options of the operating system. This only happens when the user voluntarily decides to share a list. Household lists may also be synchronized through Supabase and accessed by authorized household members. NeveraChefAI does not control how other apps selected for sharing process the list.",
     ),
     PrivacyEntry(
         title = "10. Third-Party Services",
-        body = "The app may use third-party services needed for distribution, technical operation, ads, or platform features, including Google AdMob where applicable. These services may process technical data, device identifiers, or consent signals according to their own policies. If new third-party services are added for analytics, crash reporting, cloud sync, authentication, payments, or external APIs, this policy will be updated.",
+        body = "The app may use third-party services needed for distribution, technical operation, ads, or platform features, including Google AdMob where applicable. These services may process technical data, device identifiers, or consent signals according to their own policies. Supabase provides authentication, cloud storage and household synchronization. Google or Apple may provide sign-in when you choose those methods. Each provider processes data under its own policies.",
     ),
     PrivacyEntry(
         title = "11. Security",
-        body = "NeveraChefAI uses storage mechanisms provided by Android and iOS. Because data is stored locally, information security also depends on the user's device protections, such as screen lock, device encryption, and operating system updates.",
+        body = "NeveraChefAI uses storage mechanisms provided by Android and iOS. Cloud access is controlled through authentication and household permissions. Information security also depends on device protections, such as screen lock, device encryption, and operating system updates.",
     ),
     PrivacyEntry(
         title = "12. Children",
@@ -979,12 +984,12 @@ private fun englishPrivacyEntries() = listOf(
     ),
     PrivacyEntry(
         title = "13. User Rights and Control",
-        body = "Because the main data is stored locally on the device and is not transmitted to the app controller, users keep direct control over it. Users can:",
+        body = "Users can manage local data and request deletion of their account and associated cloud data. Use the Delete account option in this website or contact neverachefai@gmail.com. The deletion page explains the steps, deleted data, shared data and retention periods. Users can:",
         bullets = listOf(
             "view data inside the app;",
             "modify or delete foods, lists, and recipes;",
             "delete app data from system settings;",
-            "uninstall the app to remove its associated local information.",
+            "uninstall the app to remove local information; uninstalling does not delete the cloud account.",
         ),
     ),
     PrivacyEntry(
@@ -1013,16 +1018,16 @@ private fun spanishPrivacyEntries() = listOf(
         ),
     ),
     PrivacyEntry(
-        title = "4. Datos que no recopilamos",
-        body = "NeveraChefAI no crea cuentas de usuario y no envía el contenido local principal de la app a servidores propios. No solicitamos al usuario:",
+        title = "4. Cuentas y datos personales",
+        body = "Crear una cuenta es opcional. Al iniciar sesión, Supabase trata el correo electrónico, las credenciales de autenticación, el perfil y la pertenencia a hogares para proporcionar acceso y sincronización en la nube. No es necesario proporcionar:",
         bullets = listOf(
-            "nombre, correo electrónico, ubicación, contactos, fotografías, vídeos, archivos personales, datos financieros o datos de salud;",
+            "ubicación, contactos, archivos personales, datos financieros o datos de salud;",
             "historial de navegación ni datos de uso para crear perfiles de usuario.",
         ),
     ),
     PrivacyEntry(
         title = "5. Almacenamiento local",
-        body = "Los datos introducidos por el usuario se guardan en el almacenamiento local del dispositivo. NeveraChefAI no sincroniza automáticamente el inventario, la lista de la compra ni las recetas con servidores externos. El usuario puede eliminar estos datos dentro de la app cuando exista esa opción, borrando los datos de la app desde los ajustes del sistema operativo o desinstalando la aplicación.",
+        body = "Los datos se guardan localmente en el dispositivo. Si utilizas una cuenta, Supabase también almacena tu perfil, preferencias de recetas y el inventario, las listas de la compra y el historial de compras de tus hogares para sincronizarlos. Borrar los datos de la app o desinstalarla elimina datos locales, pero no elimina tu cuenta en la nube.",
     ),
     PrivacyEntry(
         title = "6. Uso del micrófono",
@@ -1038,15 +1043,15 @@ private fun spanishPrivacyEntries() = listOf(
     ),
     PrivacyEntry(
         title = "9. Compartir listas de la compra",
-        body = "NeveraChefAI puede permitir al usuario compartir listas de la compra con otras personas mediante las opciones estándar del sistema operativo. Esta acción solo se produce cuando el usuario decide compartir voluntariamente una lista. NeveraChefAI no conserva una copia externa de la lista compartida ni controla el tratamiento que puedan realizar las aplicaciones elegidas por el usuario.",
+        body = "NeveraChefAI puede permitir al usuario compartir listas de la compra con otras personas mediante las opciones estándar del sistema operativo. Esta acción solo se produce cuando el usuario decide compartir voluntariamente una lista. Las listas de los hogares también pueden sincronizarse mediante Supabase y ser consultadas por sus miembros autorizados. NeveraChefAI no controla el tratamiento que realicen otras aplicaciones elegidas para compartir la lista.",
     ),
     PrivacyEntry(
         title = "10. Servicios de terceros",
-        body = "La app puede utilizar servicios de terceros necesarios para distribución, funcionamiento técnico, anuncios o funciones de plataforma, incluyendo Google AdMob cuando corresponda. Estos servicios pueden tratar datos técnicos, identificadores del dispositivo o señales de consentimiento según sus propias políticas. Si se incorporan nuevos servicios de analítica, informes de errores, sincronización en la nube, autenticación, pagos o APIs externas, esta política será actualizada.",
+        body = "La app puede utilizar servicios de terceros necesarios para distribución, funcionamiento técnico, anuncios o funciones de plataforma, incluyendo Google AdMob cuando corresponda. Estos servicios pueden tratar datos técnicos, identificadores del dispositivo o señales de consentimiento según sus propias políticas. Supabase proporciona autenticación, almacenamiento en la nube y sincronización de hogares. Google o Apple pueden proporcionar el inicio de sesión cuando eliges esos métodos. Cada proveedor trata datos de acuerdo con sus propias políticas.",
     ),
     PrivacyEntry(
         title = "11. Seguridad",
-        body = "NeveraChefAI utiliza los mecanismos de almacenamiento proporcionados por Android e iOS. Dado que los datos se almacenan localmente, la seguridad de la información también depende de las medidas de protección del dispositivo del usuario, como bloqueo de pantalla, cifrado del dispositivo y actualizaciones del sistema operativo.",
+        body = "NeveraChefAI utiliza los mecanismos de almacenamiento proporcionados por Android e iOS. El acceso a la nube se controla mediante autenticación y permisos de los hogares. La seguridad también depende de las medidas de protección del dispositivo, como bloqueo de pantalla, cifrado y actualizaciones del sistema operativo.",
     ),
     PrivacyEntry(
         title = "12. Menores de edad",
@@ -1054,12 +1059,12 @@ private fun spanishPrivacyEntries() = listOf(
     ),
     PrivacyEntry(
         title = "13. Derechos y control del usuario",
-        body = "Como los datos principales se almacenan localmente en el dispositivo y no se transmiten al responsable de la aplicación, el usuario mantiene el control directo sobre ellos. El usuario puede:",
+        body = "El usuario puede gestionar sus datos locales y solicitar la eliminación de su cuenta y los datos asociados en la nube desde la opción Eliminar cuenta de esta web o escribiendo a neverachefai@gmail.com. La página de eliminación detalla los pasos, los datos eliminados, los datos compartidos y los plazos de conservación. El usuario puede:",
         bullets = listOf(
             "consultar los datos dentro de la aplicación;",
             "modificar o eliminar alimentos, listas y recetas;",
             "eliminar los datos de la aplicación desde los ajustes del sistema;",
-            "desinstalar la aplicación para eliminar su información local asociada.",
+            "desinstalar la aplicación para eliminar información local; esto no elimina la cuenta en la nube.",
         ),
     ),
     PrivacyEntry(

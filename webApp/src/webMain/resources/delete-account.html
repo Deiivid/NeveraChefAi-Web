@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Elimina tu cuenta de NeveraChefAI y los datos personales asociados o solicita ayuda para hacerlo.">
+    <meta name="referrer" content="no-referrer">
+    <title>Eliminar cuenta · NeveraChefAI</title>
+    <link rel="stylesheet" href="account-deletion.css">
+    <script src="account-deletion-config.js" defer></script>
+    <script src="account-deletion.js" defer></script>
+</head>
+<body>
+<header>
+    <a class="brand" href="./" aria-label="NeveraChefAI, inicio">Nevera<span>ChefAI</span></a>
+    <a href="./">Volver al inicio</a>
+</header>
+<main>
+    <h1>Eliminar tu cuenta de NeveraChefAI</h1>
+    <p class="intro">Puedes eliminar tu cuenta y los datos personales asociados desde esta página, sin instalar la aplicación. Esta acción es permanente.</p>
+
+    <section aria-labelledby="steps-title">
+        <h2 id="steps-title">Cómo eliminar tu cuenta</h2>
+        <ol>
+            <li>Introduce el correo y la contraseña de tu cuenta de NeveraChefAI.</li>
+            <li>Revisa qué datos se eliminan y marca la casilla de confirmación.</li>
+            <li>Pulsa «Eliminar mi cuenta definitivamente» y espera la confirmación en pantalla.</li>
+        </ol>
+        <p>Si eres propietario de un hogar compartido con otras personas, primero debes transferir la propiedad desde la gestión del hogar en la app. Si no puedes acceder a ella, <a href="#help">solicita ayuda por correo</a>.</p>
+    </section>
+
+    <section aria-labelledby="data-title">
+        <h2 id="data-title">Qué se elimina y qué se conserva</h2>
+        <ul>
+            <li><strong>Se eliminan:</strong> tu cuenta de acceso, correo, credenciales, perfil, avatar almacenado en NeveraChefAI, preferencias de recetas y pertenencia a los hogares.</li>
+            <li><strong>Hogares de los que eres el único miembro y propietario:</strong> se eliminan junto con su inventario, lista de la compra e historial de compras.</li>
+            <li><strong>Hogares que siguen usando otras personas:</strong> sus alimentos, listas e historial se conservan mientras exista el hogar. Se elimina la referencia a tu usuario como autor de esos registros.</li>
+            <li><strong>Datos locales:</strong> esta página no puede borrar los datos guardados en tus dispositivos. Para eliminarlos, borra los datos de NeveraChefAI desde los ajustes del dispositivo o desinstala la app.</li>
+        </ul>
+        <p><strong>Plazo:</strong> el borrado de la cuenta y de los datos activos indicados se completa cuando aparece la confirmación de éxito, sin un periodo de espera adicional.</p>
+        <p id="retention-notice">El proyecto actual de Supabase utiliza el plan Free, sin copias de seguridad programadas ni recuperación a un punto en el tiempo (PITR). Los registros de API y base de datos tienen una retención de 1 día; los de auditoría de autenticación, de 1 hora, para el funcionamiento y la seguridad del servicio. La escritura adicional de auditoría de autenticación en la base de datos está desactivada.</p>
+    </section>
+
+    <section aria-labelledby="form-title">
+        <h2 id="form-title">Confirma tu identidad</h2>
+        <p>Utiliza los mismos datos con los que accedes a NeveraChefAI. Las credenciales se envían a Supabase para verificar tu identidad y no se guardan en esta web.</p>
+        <noscript><p class="notice">Activa JavaScript para usar el formulario o <a href="#help">solicita la eliminación por correo</a>.</p></noscript>
+        <p id="configuration-notice" class="notice" hidden>La eliminación automática no está disponible en este momento. Puedes solicitarla por correo en el apartado de ayuda.</p>
+        <form id="delete-account-form" aria-describedby="form-status">
+            <fieldset id="account-fields" disabled>
+                <label for="email">Correo electrónico</label>
+                <input id="email" name="email" type="email" autocomplete="username" inputmode="email" maxlength="254" required>
+                <label for="password">Contraseña</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required>
+                <label class="confirmation" for="confirmation">
+                    <input id="confirmation" name="confirmation" type="checkbox" required>
+                    <span>Entiendo qué datos se eliminan y que no podré recuperar mi cuenta.</span>
+                </label>
+                <button id="delete-button" type="submit">Eliminar mi cuenta definitivamente</button>
+            </fieldset>
+        </form>
+        <p id="form-status" role="status" aria-live="polite" tabindex="-1"></p>
+    </section>
+
+    <section id="help" aria-labelledby="help-title">
+        <h2 id="help-title">¿No puedes acceder a tu cuenta?</h2>
+        <p>Si has olvidado la contraseña, usas Google o Apple, necesitas ayuda con tu hogar o prefieres solicitar la eliminación por correo, escribe desde la dirección asociada a tu cuenta:</p>
+        <a class="support" href="mailto:neverachefai@gmail.com?subject=Eliminar%20cuenta%20de%20NeveraChefAI">Solicitar eliminación a neverachefai@gmail.com</a>
+        <p>Indica que quieres eliminar tu cuenta de NeveraChefAI y sus datos asociados. Verificaremos la titularidad antes de tramitarla. No envíes tu contraseña por correo. Este formulario no elimina tu cuenta de Google o Apple.</p>
+    </section>
+</main>
+<footer>NeveraChefAI · <a href="mailto:neverachefai@gmail.com">Contacto</a></footer>
+</body>
+</html>

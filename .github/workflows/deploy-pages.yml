@@ -44,6 +44,10 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Build WASM
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY }}
+          ACCOUNT_DELETION_RETENTION_NOTICE: ${{ vars.ACCOUNT_DELETION_RETENTION_NOTICE }}
         run: ./gradlew :webApp:wasmJsBrowserDistribution --no-daemon
 
       - name: Prepare Pages artifact
